@@ -95,12 +95,12 @@ Page \thepage
 
 \begin{document}
 
-\center{
-{\LARGE \textbf{\textit{ScoutIT}:  \linebreak Interior Tomography using Modified Scout Acquisition}}
+{\center \LARGE \textbf{\textit{ScoutIT}:   Interior Tomography using Modified Scout Acquisition}}
+\linebreak
 \linebreak
 \vspace{1.5 cm} 
 {\Large \textit{Kriti Sen Sharma} }
-}
+
 \tableofcontents
 \setcounter{tocdepth}{0}
 
@@ -265,26 +265,66 @@ Thus we have a system of four equations with four unknowns $\left\lbrace x_0, y_
 \section{Results}
 \label{sec:results}
 
-Here we show experimental proof for the following:
-\begin{itemize}
-	\item \textbf{\textit{[Completed]}}: For Shepp-Logan phantom placed at an arbitrary displacement from iso-center, if ML scout is non-truncated and AP scout in modified configuration is non-truncated, then the four parameters of the ellipse are accurately determined. Example below:
-		\begin{itemize}
-			\item Shepp Logan phantom was expressed into a $512 \times 512$ image grid. The major and minor axes were measured manually as $R_x $ and $R_y $ pixels. A perturbation from iso-center $(x_0, y_0)$ was introduced. Thus we ran simulations using $\left\lbrace x_0 = -5, y_0 = -8, R_x = 233 , R_y = 177 \right\rbrace$
-			\item Scout projections were generated using OpenRecon forward projector codes
-			\item The AP scout was truncated (and ML scout was non-truncated) in the original configuration. By moving the detector down by 200 mm, a non-truncated AP scout was acquired. 
-			\item The edges of the non-truncated scout views were measured and the slope of the tangents were calculated using equations \ref{eqn:tangent_mlscout} and \ref{eqn:tangent_apscout}
-			\item Finally, the system of equations \ref{eq:finalsysofeqs} was solved to determine the unknowns $\left\lbrace x_0 = -4.89, y_0 = -8.16, R_x = 233 , R_y = 173 \right\rbrace$
-			\item We noted that the calculated values matched the simulation parameters closely
-		\end{itemize}
-	\item \textbf{\textit{[Completed, need to add description]}}: Next, we showed that knowledge of the patient habitus (approximated by an ellipse) led to more accurate interior tomography than existing methods (that do not use knowledge acquired from the scout views)
-	\item \textbf{\textit{[To be done]}}: Finally, we show the same trend in results for real clinical data for obese patient cases
-\end{itemize}
+\subsection{Numerical phantom}
+The proposed method is tested through numerical simulation. The Shepp-Logan phantom was expressed into a $512 \times 512$ image grid. At this image grid, the major and minor axes of the major ellipse comprising the Shepp Logan phantom were measured manually as $R_x = 233$ and $R_y = 177$ pixels. When simulations are carried out on the Shepp-Logan phantom, the major ellipse is typically centered at the iso-center of the simulated gantry. For the purpose of this paper (and in most real-life situations), this is not a realistic assumption because the patient is not always centered perfectly at the gantry iso-center. Keeping this in mind, we assumed for our tests that the phantom was not perfectly centered at the gantry iso-center. In the following test, we used a perturbation from iso-center $(x_0 = -5, y_0 = -8)$ pixels (i.e. a 2.1\% deviation w.r.t. $R_x$ and a 4.5\% deviation w.r.t $R_y$). While these values were arbitrarily selected, the accuracy of the proposed method is expected to hold for other values of perturbation from gantry iso-center (provided $x_0$ and $y_0$ are within reasonable bounds of patient centering error). %Thus we ran simulations using $\left\lbrace x_0 = -5, y_0 = -8, R_x = 233 , R_y = 177 \right\rbrace$
+
+\subsection{Projection acquisition}
+Next, scout projections and entire tomographic scan were generated for the phantom. The scan parameters used in our test are provided in Table. \ref{tab:asdf}. As seen in Fig. \ref{fig:sinograms}B, the AP projections are truncated, but the ML projections are not. Similarly, the AP scout is truncated, but the ML scout is non-truncated in this configuration. By moving the detector down by 200 mm, a non-truncated AP scout was acquired. As a reference, the global tomographic scan is shown in Fig. \ref{fig:sinograms}A.  
+
+\begin{figure}[hbtp]
+\centering
+\includegraphics[width=15 cm]{figures/figuresScoutIT-sinograms}
+\caption{Sinograms used in the study: (A) Global projection sinogram (reference), (B) Truncated projection (note that some of the ML views are non-truncated, (C) Projection completion by Edge-Gauss method without knowledge of patient boundary information, (D) Projection completion by Edge-Gauss method utilizing patient boundary estimated by proposed method. \label{fig:sinograms}
+}
+\end{figure}
+
+\subsection{Estimation of ellipse parameters}
+
+The edges of the non-truncated scout views were measured and the slope of the tangents were calculated using equations \ref{eqn:tangent_mlscout} and \ref{eqn:tangent_apscout}. Finally, the system of equations \ref{eq:finalsysofeqs} was solved to determine the unknowns $x_0, y_0, R_x$ and $R_y$. The results are tabulated in Table \ref{tab:ellipse_params}; the derived values match closely with the values of ellipse parameters used in the simulation. 
+
+As further evidence, the difference image between the binary maps of the convex hull of the Shepp Logan phantom and the estimated ellipse is shown in Fig. \ref{fig:recon-images}E. 
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline 
+ & \textbf{$R_x$} & \textbf{$R_y$} & \textbf{$x_0$} & \textbf{$y_0$} \\ 
+\hline 
+Actual (pixels) & 233 & 177 & -5 & -8 \\ 
+\hline 
+Proposed method (pxls) & 233 & 173 & -4.89 & -8.16 \\ 
+\hline 
+\end{tabular} 
+\caption{\label{tab:ellipse_params} Actual ellipse parameters used in the numerical simulation (first row), and results of the proposed method (second row).}
+\end{center}
+\end{table}
+
+\begin{figure}[hbtp]
+\centering
+\includegraphics[width=15 cm]{figures/figuresScoutIT-recons}
+\caption{Images of Shepp-Logan phantom: (A) Original phantom, (B) Global fan-beam reconstruction (shown as a reference), (C) Reconstruction of projection completed by Edge-Gauss method without patient boundary information, (D) Reconstruction of projection completed by proposed method, (E) Difference image of convex hull of phantom, and estimated ellipse. \label{fig:recon-images}}
+\end{figure}
+
+\subsection{Usage of ellipse parameters in interior tomography}
+
+For reconstruction of the truncated sinogram, we utilized the simple (yet popular) method of Edge-Gauss extrapolation of truncated projections \cite{Hoppe2008}. As a reference, we first ran extrapolation without knowledge of the object boundary. This kind of extrapolation is commonly employed in the field, and the resultant extrapolated sinogram is shown in Fig. \ref{fig:sinograms}C. The image reconstructed by this method is shown in Fig. \ref{fig:recon-images}C. Line profile is taken across the green segment marked on this figure, and plotted in Fig. \ref{fig:lineprofiles}. The reconstruction is quite similar to the global fan-beam reconstruction -- however, the left portion of the line profile shows that the reconstruction value differs significantly from the global fan-beam reconstruction (the global fan-beam reconstruction being the best-case achievable result). 
+
+Finally, we utilize the derived values for the ellipse parameters ($x_0, y_0, R_x, R_y$) for accurate interior tomography. The estimated ellipse provides the additional knowledge about the patient habitus. This information is utilized while employing projection completion using Edge-Gauss technique. The projection completed sinogram by proposed method is shown in Fig. \ref{fig:sinograms}D; clearly, there is a much greater resemblance with the global projection in this case. The reconstructed image is shown in Fig. \ref{fig:recon-images}D, and the line profile is shown in Fig. \ref{fig:lineprofiles}. The proposed method allows the final reconstruction to be very similar to global fan-beam reconstruction, even in the left-portion of the line-profile. 
+
+\begin{figure}[hbtp]
+\centering
+\includegraphics[width=15 cm]{figures/figuresScoutIT-lineprofiles}
+\caption{Line profiles across segment marked in Fig. \ref{fig:recon-images}: (A) Original phantom, (B) Global fan-beam reconstruction (shown as a reference), (C) Reconstruction of projection completed by Edge-Gauss method without patient boundary information, (D) Reconstruction of projection completed by proposed method \label{fig:lineprofiles}}
+\end{figure}
+
 
 %=========================================================================
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discussion}
 
+We showed that, for Shepp-Logan phantom placed at an arbitrary displacement from iso-center, if ML scout is non-truncated and AP scout in modified configuration is non-truncated, then the four parameters of the ellipse can be accurately determined. Next, we showed that knowledge of the patient habitus (approximated by an ellipse in our case) leads to more accurate interior tomography than existing methods (that do not use knowledge acquired from the scout views). Futures steps include demonstration of the proposed method for truncated clinical projection data.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{bibl_scoutit}   %>>>> bibliography data in prelim.bib
 \bibliographystyle{spiebib}   %>>>> makes bibtex use spiebib.bst
