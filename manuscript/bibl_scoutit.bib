@@ -1,3 +1,16 @@
+@article{Defrise2006,
+author = {Defrise, Michel and Noo, Fr{\'{e}}d{\'{e}}ric and Clackdoyle, Rolf and Kudo, Hiroyuki},
+doi = {10.1088/0266-5611/22/3/019},
+issn = {0266-5611},
+journal = {Inverse Problems},
+month = {jun},
+number = {3},
+pages = {1037--1053},
+title = {{Truncated Hilbert transform and image reconstruction from limited tomographic data}},
+url = {http://stacks.iop.org/0266-5611/22/i=3/a=019?key=crossref.a1457e7c4903d61842d0831ffd1fdabd},
+volume = {22},
+year = {2006}
+}
 @article{Hoppe2008,
 author = {Hoppe, Stefan and Hornegger, Joachim and Lauritsch, Günter and Dennerlein, Frank and Noo, Frédéric},
 doi = {10.1118/1.3002416},
@@ -50,6 +63,41 @@ number = {March},
 title = {{Comparative specifications: Wide bore CT scanners (CEP08029)}},
 year = {2009}
 }
+@article{Kolditz2011,
+abstract = {In C-arm-based flat-detector computed tomography (FDCT) it frequently happens that the patient exceeds the scan field of view (SFOV) in the transaxial direction because of the limited detector size. This results in data truncation and CT image artefacts. In this work three truncation correction approaches for extended field-of-view (EFOV) reconstructions have been implemented and evaluated. An FDCT-based method estimates the patient size and shape from the truncated projections by fitting an elliptical model to the raw data in order to apply an extrapolation. In a camera-based approach the patient is sampled with an optical tracking system and this information is used to apply an extrapolation. In a CT-based method the projections are completed by artificial projection data obtained from the CT data acquired in an earlier exam. For all methods the extended projections are filtered and backprojected with a standard Feldkamp-type algorithm. Quantitative evaluations have been performed by simulations of voxelized phantoms on the basis of the root mean square deviation and a quality factor Q (Q = 1 represents the ideal correction). Measurements with a C-arm FDCT system have been used to validate the simulations and to investigate the practical applicability using anthropomorphic phantoms which caused truncation in all projections. The proposed approaches enlarged the FOV to cover wider patient cross-sections. Thus, image quality inside and outside the SFOV has been improved. Best results have been obtained using the CT-based method, followed by the camera-based and the FDCT-based truncation correction. For simulations, quality factors up to 0.98 have been achieved. Truncation-induced cupping artefacts have been reduced, e.g., from 218{\%} to less than 1{\%} for the measurements. The proposed truncation correction approaches for EFOV reconstructions are an effective way to ensure accurate CT values inside the SFOV and to recover peripheral information outside the SFOV.},
+author = {Kolditz, Daniel and Meyer, Michael and Kyriakou, Yiannis and Kalender, Willi a},
+doi = {10.1088/0031-9155/56/1/003},
+issn = {1361-6560},
+journal = {Physics in medicine and biology},
+keywords = {Algorithms,Body Size,Head,Head: radiography,Hip,Hip: radiography,Humans,Phantoms, Imaging,Radiation Protection,Radiation Protection: methods,Radiography, Thoracic,Reproducibility of Results,Sensitivity and Specificity,Shoulder,Shoulder: radiography,Tomography, X-Ray Computed,Tomography, X-Ray Computed: instrumentation,Tomography, X-Ray Computed: methods},
+month = {jan},
+number = {1},
+pages = {39--56},
+pmid = {21119229},
+title = {{Comparison of extended field-of-view reconstructions in C-arm flat-detector CT using patient size, shape or attenuation information.}},
+url = {http://www.ncbi.nlm.nih.gov/pubmed/21119229},
+volume = {56},
+year = {2011}
+}
+@book{Natterer2001,
+author = {Natterer, Frank and Wubbeling, Frank},
+publisher = {Cambridge University Press, 2001},
+title = {{Mathematical Methods in Image Reconstruction}},
+year = {2001}
+}
+@article{Noo2004,
+author = {Noo, Fr{\'{e}}d{\'{e}}ric and Clackdoyle, Rolf and Pack, Jed D},
+doi = {10.1088/0031-9155/49/17/006},
+issn = {0031-9155},
+journal = {Physics in Medicine and Biology},
+month = {sep},
+number = {17},
+pages = {3903--3923},
+title = {{A two-step Hilbert transform method for 2D image reconstruction}},
+url = {http://stacks.iop.org/0031-9155/49/i=17/a=006?key=crossref.a8138938f6aedfd2dbfb012da9153584},
+volume = {49},
+year = {2004}
+}
 @article{SenSharma2013,
 abstract = {Micro computed tomography (micro-CT) is a widely-used imaging technique. A challenge of micro-CT is to quantitatively reconstruct a sample larger than the field-of-view (FOV) of the detector. This scenario is characterized by truncated projections and associated image artifacts. However, for such truncated scans, a low resolution scout scan with an increased FOV is frequently acquired so as to position the sample properly. This study shows that the otherwise discarded scout scans can provide sufficient additional information to uniquely and stably reconstruct the interior region of interest. Two interior reconstruction methods are designed to utilize the multi-resolution data without significant computational overhead. While most previous studies used numerically truncated global projections as interior data, this study uses truly hybrid scans where global and interior scans were carried out at different resolutions. Additionally, owing to the lack of standard interior micro-CT phantoms, we designed and fabricated novel interior micro-CT phantoms for this study to provide means of validation for our algorithms. Finally, two characteristic samples from separate studies were scanned to show the effect of our reconstructions. The presented methods show significant improvements over existing reconstruction algorithms.},
 author = {{Sen Sharma}, Kriti and Holzner, Christian and Vasilescu, Dragoş M and Jin, Xin and Narayanan, Shree and Agah, Masoud and Hoffman, Eric A and Yu, Hengyong and Wang, Ge},
@@ -65,6 +113,12 @@ title = {{Scout-view assisted interior micro-CT}},
 url = {http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=3732817{\&}tool=pmcentrez{\&}rendertype=abstract},
 volume = {58},
 year = {2013}
+}
+@phdthesis{VanGompel2009,
+author = {{Van Gompel}, Gert},
+school = {University of Antwerp},
+title = {{Towards accurate image reconstruction from truncated x-ray CT projections}},
+year = {2009}
 }
 @article{Xia2015,
 author = {Xia, Y. and Bauer, S. and Maier, a. and Berger, M. and Hornegger, J.},
@@ -87,4 +141,13 @@ pages = {414--417},
 title = {{Patient-bounded Extrapolation for 3D Region of Interest Reconstruction in C-arm CT}},
 url = {https://www5.informatik.uni-erlangen.de/Forschung/Publikationen/2014/Xia14-PEF.pdf},
 year = {2014}
+}
+@article{Yu2009,
+author = {Yu, H and Wang, G},
+journal = {Physics in medicine and biology},
+number = {9},
+pages = {p2791--2805},
+title = {{Compressed sensing based interior tomography}},
+volume = {54},
+year = {2009}
 }

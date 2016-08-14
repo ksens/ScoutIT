@@ -96,7 +96,7 @@ Page \thepage
 
 \begin{document}
 
-{\center \LARGE \textbf{\textit{ScoutIT}:   Interior Tomography using Modified Scout Acquisition}}
+{\center \LARGE \textbf{\textit{Scout-It}:   Interior tomography using modified scout acquisition}}
 \linebreak
 \linebreak
 \vspace{1.5 cm} 
@@ -112,7 +112,11 @@ Page \thepage
 \section{Introduction}
 \label{sec:introduction}
 
-Xia et al. \cite{Xia2015} recently reported a method to improve image quality in truncated volume-of-interest (VOI) imaging using anterior-posterior (AP) and medio-lateral (ML) scout views. Their work was applied to C-arm based imaging, and relied on the assumption that the scout views cover the entire object, while the final VOI scan is severely truncated. In clinical computed tomography (CT), it is quite common that both the AP scout view and the final tomographic scan are moderately truncated, but the ML scout view is not truncated. This paper shows that acquiring AP scout views with a modified configuration allows accurate interior tomography for a truncated tomographic CT scan. 
+Truncated projections in computed tomography (CT) arise when the patient / object being scanned does not fit within the x-ray beam. This leads to severe artifacts (e.g. cupping, dc bias) in the reconstructed image 	\cite{Natterer2001}. There are several methods that attempt to reduce such `interior reconstruction' artifacts. The first among those methods are those that do not use any prior information e.g. sinogram extension techniques \cite{Kolditz2011,VanGompel2009}, and compressed sensing based reconstruction \cite{Yu2009}. Among these, the former has minimal computational burden but the reconstruction may not be accurate; the latter is highly time consuming and thus may not be commercially viable in many applications. Next, there are  methods that utilize some form of prior information e.g. Hilbert tranform based methods \cite{Noo2004,Defrise2006} that deal with only a certain class of truncated projections, and scout view based methods \cite{SenSharma2013,Xia2015}. 
+
+Scout views are typically always acquired as part of the setup before the final tomographic scan, and thus can be a reliable source of prior information. This author had previously demonstrated that few global scout views can provide highly accurate interior reconstruction in the field of high-resolution micro-CT \cite{SenSharma2013}. More recently, Xia et al. \cite{Xia2015} reported a method to improve image quality in truncated volume-of-interest (VOI) imaging using anterior-posterior (AP) and medio-lateral (ML) scout views. Their work was applied to C-arm based imaging, and relied on the assumption that the scout views cover the entire object, while the final VOI scan is severely truncated. 
+
+In clinical computed tomography (CT), it is quite common that the final tomographic scan is partially truncated (i.e. a fraction of the views are truncated while the rest of the views are non-truncated. In such cases, the AP (anterio-posterior) scout view is usually truncated, but the ML (medio-lateral, or simply `lateral') scout view is not truncated. This paper shows that acquiring AP scout views with a modified configuration allows non-truncated AP scout views. The two non-truncated scout views are then used for a rough estimation of the patient habitus, that in turn allows accurate interior tomography for a truncated tomographic CT scan. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Methods}
@@ -274,7 +278,9 @@ Thus we have a system of four equations with four unknowns $\left\lbrace x_0, y_
 The proposed method is tested through numerical simulation. The Shepp-Logan phantom was expressed into a $512 \times 512$ image grid. At this image grid, the major and minor axes of the major ellipse comprising the Shepp Logan phantom were measured manually as $R_x = 233$ and $R_y = 177$ pixels. When simulations are carried out on the Shepp-Logan phantom, the major ellipse is typically centered at the iso-center of the simulated gantry. For the purpose of this paper (and in most real-life situations), this is not a realistic assumption because the patient is not always centered perfectly at the gantry iso-center. Keeping this in mind, we assumed for our tests that the phantom was not perfectly centered at the gantry iso-center. In the following test, we used a perturbation from iso-center $(x_0 = -5, y_0 = -8)$ pixels (i.e. a 2.1\% deviation w.r.t. $R_x$ and a 4.5\% deviation w.r.t $R_y$). While these values were arbitrarily selected, the accuracy of the proposed method is expected to hold for other values of perturbation from gantry iso-center (provided $x_0$ and $y_0$ are within reasonable bounds of patient centering error). %Thus we ran simulations using $\left\lbrace x_0 = -5, y_0 = -8, R_x = 233 , R_y = 177 \right\rbrace$
 
 \subsection{Projection acquisition}
-Next, scout projections and entire tomographic scan were generated for the phantom. The scan parameters used in our test are provided in Table. \ref{tab:asdf}. As seen in Fig. \ref{fig:sinograms}B, the AP projections are truncated, but the ML projections are not. Similarly, the AP scout is truncated, but the ML scout is non-truncated in this configuration. By moving the detector down by 200 mm, a non-truncated AP scout was acquired. As a reference, the global tomographic scan is shown in Fig. \ref{fig:sinograms}A.  
+Next, scout projections and entire tomographic scan were generated for the phantom. The scan parameters used in our test (along with the code) are provided at \url{https://github.com/ksens/scoutIT}. As seen in Fig. \ref{fig:sinograms}B, the AP projections are truncated, but the ML projections are not. Similarly, the AP scout is truncated, but the ML scout is non-truncated in this configuration. By moving the detector down by 200 mm, a non-truncated AP scout was acquired. As a reference, the global tomographic scan is shown in Fig. \ref{fig:sinograms}A.  
+
+%%% NEED TO ADD TABLE OF SCAN PARAMETERS ABOVE (by consulting the code)
 
 \begin{figure}[hbtp]
 \centering

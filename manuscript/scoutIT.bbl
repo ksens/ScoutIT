@@ -1,4 +1,39 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{Natterer2001}
+F.~Natterer and F.~Wubbeling, {\em {Mathematical Methods in Image
+  Reconstruction}}, Cambridge University Press, 2001, 2001.
+
+\bibitem{Kolditz2011}
+D.~Kolditz, M.~Meyer, Y.~Kyriakou, and W.~a. Kalender, ``{Comparison of
+  extended field-of-view reconstructions in C-arm flat-detector CT using
+  patient size, shape or attenuation information.},'' {\em Physics in medicine
+  and biology}~{\bf 56}, pp.~39--56, jan 2011.
+
+\bibitem{VanGompel2009}
+G.~{Van Gompel}, {\em {Towards accurate image reconstruction from truncated
+  x-ray CT projections}}.
+\newblock PhD thesis, University of Antwerp, 2009.
+
+\bibitem{Yu2009}
+H.~Yu and G.~Wang, ``{Compressed sensing based interior tomography},'' {\em
+  Physics in medicine and biology}~{\bf 54}(9), pp.~p2791--2805, 2009.
+
+\bibitem{Noo2004}
+F.~Noo, R.~Clackdoyle, and J.~D. Pack, ``{A two-step Hilbert transform method
+  for 2D image reconstruction},'' {\em Physics in Medicine and Biology}~{\bf
+  49}, pp.~3903--3923, sep 2004.
+
+\bibitem{Defrise2006}
+M.~Defrise, F.~Noo, R.~Clackdoyle, and H.~Kudo, ``{Truncated Hilbert transform
+  and image reconstruction from limited tomographic data},'' {\em Inverse
+  Problems}~{\bf 22}, pp.~1037--1053, jun 2006.
+
+\bibitem{SenSharma2013}
+K.~{Sen Sharma}, C.~Holzner, D.~M. Vasilescu, X.~Jin, S.~Narayanan, M.~Agah,
+  E.~A. Hoffman, H.~Yu, and G.~Wang, ``{Scout-view assisted interior
+  micro-CT},'' {\em Physics in Medicine and Biology}~{\bf 58}(12),
+  pp.~4297--314, 2013.
 
 \bibitem{Xia2015}
 Y.~Xia, S.~Bauer, a.~Maier, M.~Berger, and J.~Hornegger, ``{Patient-bounded
