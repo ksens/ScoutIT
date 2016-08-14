@@ -1,0 +1,17 @@
+\begin{thebibliography}{1}
+
+\bibitem{Xia2015}
+Y.~Xia, S.~Bauer, a.~Maier, M.~Berger, and J.~Hornegger, ``{Patient-bounded
+  extrapolation using low-dose priors for volume-of-interest imaging in C-arm
+  CT},'' {\em Medical Physics}~{\bf 42}(4), pp.~1787--1796, 2015.
+
+\bibitem{ImPACTCenterforEvidencebasedPurchasing2009}
+{ImPACT Center for Evidence based Purchasing}, ``{Comparative specifications:
+  Wide bore CT scanners (CEP08029)},'' Tech. Rep. March, 2009.
+
+\bibitem{Hoppe2008}
+S.~Hoppe, J.~Hornegger, G.~Lauritsch, F.~Dennerlein, and F.~Noo, ``{Truncation
+  correction for oblique filtering lines},'' {\em Medical Physics}~{\bf
+  35}(12), p.~5910, 2008.
+
+\end{thebibliography}

@@ -1,3 +1,4 @@
+\pdfoutput=1
 \documentclass[]{spie}
 %\documentclass[conference]{IEEEtran}
 \usepackage[]{graphicx}
@@ -127,28 +128,32 @@ Xia et al. \cite{Xia2015} recently reported a method to improve image quality in
 \subsection{Modified scout configuration}
 \label{ssec:modified_scout}
 
-Figure \ref{fig:blockdiag_mar2}A shows a normal scout configuration. The technologist typically attempts to align the patient at the iso-center (patient centering might not be accurate, and is typically improved through information gathered through the scouts). The source-to-(assumed)-iso-center distance is noted as $D_0$ in the figure. For  patients whose body-habitus does not lie within the FFOV of the scanner, the truncation predominantly arises in the AP direction but the lateral (ML) scouts are not truncated. 
+Figure \ref{fig:scout_configurations}A shows a normal scout configuration. The technologist typically attempts to align the patient at the iso-center (patient centering might not be accurate, and is typically improved through information gathered through the scouts). The source-to-(assumed)-iso-center distance is noted as $D_0$ in the figure. For  patients whose body-habitus does not lie within the FFOV of the scanner, the truncation predominantly arises in the AP direction but the lateral (ML) scouts are not truncated. 
 
 \begin{figure}[hbtp]
 \centering
-\includegraphics[width=15 cm]{figures/scoutIT_geometry}
-\caption{Block diagram for two-pass metal artifact reduction algorithm (MAR2) \label{fig:blockdiag_mar2}
+\includegraphics[width=15 cm]{fig-geometry}
+\caption{Various scout configurations: (A) normal configuration where lateral scout is non-truncated but AP scout is truncated, (B) modified scout configuration where lateral scout is unchanged, but change in source-to-patient distance allows non-truncated AP scout. \label{fig:scout_configurations}
 }
 \end{figure}
 
-As shown in Fig. \ref{fig:blockdiag_mar2}B, we propose a modified scout acquisition. While the lateral (ML) scouts are acquired in the original configuration, the AP scouts are acquired after moving the table down by a distance $d$ (there is of course a limit to how far the table can move down in the gantry). By moving the patient table down, the geometric magnification at the detector changes, and a larger patient habitus can be covered by x-ray beam. The modified AP scout configuration allows acquisition of non-truncated AP projections up to an extended body habitus of length $L_{eff}$, where:
+As shown in Fig. \ref{fig:scout_configurations}B, we propose a modified scout acquisition. While the lateral (ML) scouts are acquired in the original configuration, the AP scouts are acquired after moving the table down by a distance $d$ (there is of course a limit to how far the table can move down in the gantry). By moving the patient table down, the geometric magnification at the detector changes, and a larger patient habitus can be covered by the x-ray beam. The modified AP scout configuration allows acquisition of non-truncated AP projections up to an extended body habitus of length $L_{\mathrm{eff}}$, where:
 \begin{align}
-L = \frac{D}{D_0}\times FFOV
+L_{\mathrm{eff}} = \frac{D}{D_0}\times FFOV
 \end{align}
 
 % TODO: Modify to generic CT system
-We calculate the value for $L_{eff}$ for four CT scanners whose geometric specifications were reported in \cite{ImPACTCenterforEvidencebasedPurchasing2009}. We make the following assumptions:
+We calculate the value for $L_{\mathrm{eff}}$ for four CT scanners: GE LightSpeed Xtra (General Electric Co., Waukesha, USA), Philips Brilliance Big Bore (Koninklijke Philips N.V., Amsterdam, Netherlands), Siemens SOMATOM Sensation Open (24/40) (Siemens AG, Berlin, Germany), and Toshiba Aquilion LB (Toshiba Medical Systems, Otawara, Japan). Geometric specifications for these scanners were retrieved from a report compiled by the ImPACT group, London, UK \cite{ImPACTCenterforEvidencebasedPurchasing2009}. 
+
+In our calculations, we make the following assumptions:
 \begin{itemize}
 	\item the AP scouts are typically acquired at or near the actual iso-center
 	\item the patient table can be moved down in the gantry by at least 150 mm; this appears to be a realistic estimate as the bore radius is greater than 400 mm for all the scanners in list below
 \end{itemize}
 
-Table \ref{tab:scanner_geoms} provides a list of relevant geometric specifications reproduced from  \cite{ImPACTCenterforEvidencebasedPurchasing2009}, the resulting value of $L_{eff}$ for a table displacement $d = 150 mm$, and the resulting percentage increase in patient habitus coverage. 
+Table \ref{tab:scanner_geoms} provides a list of relevant geometric specifications reproduced in the ImPACT group report  \cite{ImPACTCenterforEvidencebasedPurchasing2009}, the resulting value of $L_{\mathrm{eff}}$ for a table displacement $d = 150 \, mm$, and the resulting percentage increase (w.r.t. maximum FOV reported by the manufactureer) in patient habitus coverage. The percentage increase lies between 21-26 \%, thus it is evident that the modified scout configuration allows a significant increase in field of view in the AP scout view. 
+
+Next, we show how to combine the original lateral scout and the modified AP scout to reduce truncation artifacts in the final computed tomography scan. The first step (Sec. \ref{ssec:ellipse-estimation}) of the process requires estimation of an ellipse approximately describing the patient habitus. The ellipse estimation uses the information from the original lateral (ML) and modified AP scouts. Next, the estimation can be employed in multiple ways to reduce interior reconstruction artifacts in the reconstruction of the final tomographic scan. Here, we show a simple example using simulations on the Shepp-Logan phantom and the Edge-Gauss projection completion technique \cite{Hoppe2008} (Sec. \ref{sec:results}). 
 
 \begin{table}
 \begin{center}
@@ -158,20 +163,20 @@ Table \ref{tab:scanner_geoms} provides a list of relevant geometric specificatio
 \hline 
 \hline 
 % & GE LightSpeed Xtra & Philips Brilliance Big Bore & Siemens SOMATOM Sensation Open (24 /40)  & Toshiba Aquilion LB  \\ 
- & GE LSX & Philips Br. & Siemens SOM.  & Toshiba Aq.  \\ 
+ & \textbf{GE LSX} & \textbf{Philips Br.} &\textbf{ Siemens SOM.}  & \textbf{Toshiba Aq.}  \\ 
 \hline 
 Aperture [cm]  & 80 & 85 & 82 & 90 \\ 
 Focus-isocentre distance [mm]  & 606 & 645 & 570 & 712 \\ 
 Focus-detector distance [mm]  & 1062.5 & 1183 & 1040 & 1275 \\ 
-Maximum reconstruction field of view & 50 & 50 & 50 & 50 \\ 
+Maximum reconstruction field of view [cm] & 50 & 50 & 50 & 50 \\ 
 Reconstruction matrices  & $512 \times 512$ & $512 \times 512$ & $512 \times 512$ & $512 \times 512$ \\ 
 \hline 
-$L_{eff}$ & 62.37 & 61.63 & 63.15 & 60.53 \\ 
+$L_{\mathrm{eff}}$ [cm] & 62.37 & 61.63 & 63.15 & 60.53 \\ 
 \% increase & 24.75 & 23.26 & 26.32 & 21.07 \\ 
 \hline 
 \hline 
 \end{tabular} 
-\caption{Geometric specifications of four different CT scanners and corresponding values of increased patient coverage $L_{eff}$ \label{tab:scanner_geoms}}
+\caption{Geometric specifications of four CT scanners and corresponding values of increased patient coverage $L_{\mathrm{eff}}$. The four CT scanners are GE LightSpeed Xtra (LSX), Philips Brilliance Big Bore (Br.), Siemens SOMATOM Sensation Open (SOM.), Toshiba Aquilion LB (Aq.) \label{tab:scanner_geoms}}
 \end{center}
 \end{table}
 %+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -189,7 +194,7 @@ $L_{eff}$ & 62.37 & 61.63 & 63.15 & 60.53 \\
 %
 \begin{figure}[hbtp]
 \centering
-\includegraphics[width=15 cm]{figures/scoutIT_geometry-algebra}
+\includegraphics[width=15 cm]{fig-geometry-algebra}
 \caption{Setup for acquisition of ML scout  in original configuration and AP scout in modified configuration \label{fig:scoutIT_geometry}
 }
 \end{figure}
@@ -273,7 +278,7 @@ Next, scout projections and entire tomographic scan were generated for the phant
 
 \begin{figure}[hbtp]
 \centering
-\includegraphics[width=15 cm]{figures/figuresScoutIT-sinograms}
+\includegraphics[width=15 cm]{fig-sinograms}
 \caption{Sinograms used in the study: (A) Global projection sinogram (reference), (B) Truncated projection (note that some of the ML views are non-truncated, (C) Projection completion by Edge-Gauss method without knowledge of patient boundary information, (D) Projection completion by Edge-Gauss method utilizing patient boundary estimated by proposed method. \label{fig:sinograms}
 }
 \end{figure}
@@ -301,7 +306,7 @@ Proposed method (pxls) & 233 & 173 & -4.89 & -8.16 \\
 
 \begin{figure}[hbtp]
 \centering
-\includegraphics[width=15 cm]{figures/figuresScoutIT-recons}
+\includegraphics[width=15 cm]{fig-recons}
 \caption{Images of Shepp-Logan phantom: (A) Original phantom, (B) Global fan-beam reconstruction (shown as a reference), (C) Reconstruction of projection completed by Edge-Gauss method without patient boundary information, (D) Reconstruction of projection completed by proposed method, (E) Difference image of convex hull of phantom, and estimated ellipse. \label{fig:recon-images}}
 \end{figure}
 
@@ -313,7 +318,7 @@ Finally, we utilize the derived values for the ellipse parameters ($x_0, y_0, R_
 
 \begin{figure}[hbtp]
 \centering
-\includegraphics[width=15 cm]{figures/figuresScoutIT-lineprofiles}
+\includegraphics[width=15 cm]{fig-lineprofiles}
 \caption{Line profiles across segment marked in Fig. \ref{fig:recon-images}: (A) Original phantom, (B) Global fan-beam reconstruction (shown as a reference), (C) Reconstruction of projection completed by Edge-Gauss method without patient boundary information, (D) Reconstruction of projection completed by proposed method \label{fig:lineprofiles}}
 \end{figure}
 
